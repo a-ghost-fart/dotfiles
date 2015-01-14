@@ -47,11 +47,8 @@ set list listchars=tab:\>\ ,trail:.
 set laststatus=2
 set relativenumber
 
-" Neocomplcache stuff
-let g:acp_enableAtStartup=0
-let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_enable_smart_case=1
-let g:neocomplcache_min_syntax_length=3
+" Airline
+let g:airline_powerline_fonts=1
 
 " CtrlP
 let g:ctrlp_working_path_mode = 'ra'
