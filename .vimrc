@@ -8,16 +8,13 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'wookiehangover/jshint.vim'
 Plugin 'zeis/vim-kolor'
 Plugin 'groenewege/vim-less'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'Raimondi/delimitMate'
-Plugin 'msanders/snipmate.vim'
 Plugin 'gregsexton/MatchTag'
-Plugin 'heavenshell/vim-jsdoc'
-Plugin 'puppetlabs/puppet-syntax-vim'
-Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
 
 call vundle#end()
 
@@ -36,13 +33,13 @@ set smarttab
 set expandtab
 let NERDTreeShowBookmarks=1
 let NERDTreeShowLineNumbers=0
+autocmd VimEnter * NERDTreeClose
 set mouse=a
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=1
 set guioptions-=T
-colorscheme kolor
 set cursorline
 set hlsearch
 set list listchars=tab:\>\ ,trail:.
@@ -52,10 +49,8 @@ set relativenumber
 " Airline
 let g:airline_powerline_fonts=1
 
-" CtrlP
-let g:ctrlp_working_path_mode = 'ra'
-
 " Colour guff
+colorscheme kolor
 hi NonText guifg=bg ctermfg=bg
 hi LineNr guibg=bg ctermbg=bg
 hi Whitespace cterm=underline gui=underline ctermbg=red guibg=red ctermfg=gray guifg=yellow
@@ -63,6 +58,15 @@ hi Whitespace cterm=underline gui=underline ctermbg=red guibg=red ctermfg=gray g
 " Custom commands
 map <TAB> :NERDTreeToggle<CR>
 map <S-TAB> :QFix<CR>
+
+" Unite
+let g:unite_source_rec_async_command = 'ag --nogroup --nocolor --column --hidden ' .
+    \ '--ignore ".git/" ' .
+    \ '--ignore "node/" ' .
+    \ '--ignore "bower_components/" ' .
+    \ '--ignore "node_modules/" ' .
+    \ '-g ""'
+nnoremap <C-P> :Unite -start-insert file_rec/async<CR>
 
 " Toggle quick fix window
 command -bang -nargs=? QFix call QFixToggle(<bang>0)
